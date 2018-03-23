@@ -18,7 +18,8 @@ module Murator
     config.generators do |g|
       g.test_framework :rspec,
         view_specs: false,
-        request_specs: true
+        request_specs: true,
+        controller_specs: false
     end 
   end
 end

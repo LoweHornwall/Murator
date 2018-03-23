@@ -6,9 +6,14 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
-      session[:user_id] = @user.id
-      flash[:success] = "Logged in as #{@user.name}"
-      redirect_to root_url
+      if @user.activated?
+        session[:user_id] = @user.id
+        flash[:success] = "Logged in as #{@user.name}"
+        redirect_to root_url
+      else
+        flash[:danger] = "Acccount is not activated"
+        render :new
+      end
     else
       flash[:danger] = "Invalid email/password combination"
       render :new
