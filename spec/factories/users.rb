@@ -4,5 +4,9 @@ FactoryBot.define do
     email Faker::Internet.safe_email
     password "password"
     password_confirmation "password"
+
+    trait :activated do
+      activated true
+    end
   end
 end

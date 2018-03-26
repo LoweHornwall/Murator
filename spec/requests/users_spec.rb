@@ -18,6 +18,11 @@ RSpec.describe "Users", type: :request do
           .to change{ User.count }.by 1
       end
 
+      it "sends activation email" do
+        post users_path, params: { user: attributes_for(:user) }
+        expect(ActionMailer::Base.deliveries.size).to eql 1
+      end
+
       it "redirects to root" do
         post users_path, params: { user: attributes_for(:user) }
         expect(response).to redirect_to :root
