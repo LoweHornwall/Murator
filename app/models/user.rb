@@ -8,6 +8,7 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX }, length: { maximum: 255 }
   validates :password, presence: true, length: { in: 6..64 }, allow_nil: true
   has_secure_password
+  has_many :curation_pages
 
   def User.digest(string)
     BCrypt::Password.create(string)

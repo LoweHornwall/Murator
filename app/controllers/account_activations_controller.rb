@@ -4,7 +4,7 @@ class AccountActivationsController < ApplicationController
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       user.activate
       flash[:success] = "Account activated!"
-      redirect_to :root #should probably redirect to user page once implemented
+      redirect_to user
     else
       flash[:danger] = "Invalid activation token"
       redirect_to :root

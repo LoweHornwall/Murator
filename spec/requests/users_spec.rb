@@ -11,6 +11,18 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "GET /users/:id" do
+    let(:user) { create :user }
+    before :each do
+      get user_path(user)
+    end
+
+    it { is_expected.to render_template :show}
+    it "shows user name" do
+      expect(response.body).to match user.name
+    end
+  end
+
   describe "POST /users" do
     context "when params valid" do
       it "creates a new user" do

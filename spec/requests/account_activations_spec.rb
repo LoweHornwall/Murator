@@ -16,8 +16,8 @@ RSpec.describe "AccountActivations", type: :request do
         expect(user.activated?).to eql(true)
       end
 
-      it "redirects to root" do
-        expect(response).to redirect_to :root
+      it "redirects to user" do
+        expect(response).to redirect_to user
       end
     end
 

@@ -3,6 +3,11 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+    @user = User.find(params[:id])
+    @curation_pages = @user.curation_pages.paginate(page: params[:page])
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save

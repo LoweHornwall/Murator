@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-  resources :users,  only: [:new, :create]
+  resources :users,               only: [:show, :new, :create]
   resources :account_activations, only: [:edit]
-  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :curation_pages,      only: [:index, :show, :new, :create]
   get '/login',      to: 'sessions#new'
   post '/login',     to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

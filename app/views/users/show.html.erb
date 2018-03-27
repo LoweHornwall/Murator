@@ -1,0 +1,10 @@
+<h1><%= @user.name %></h1>  
+
+<ol>
+  <%= render @curation_pages %>
+</ol>
+<%= will_paginate @curation_pages %>
+
+<% if current_user?(@user) %>
+  <%= link_to "Create new curation page", new_curation_page_path %>
+<% end %>

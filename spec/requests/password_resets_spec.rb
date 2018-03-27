@@ -143,8 +143,8 @@ RSpec.describe "PasswordResets", type: :request do
         expect(flash[:success]).to eql "Password has been updated"
       end
 
-      it "redirects to root" do
-        expect(response).to redirect_to :root
+      it "redirects to user" do
+        expect(response).to redirect_to user
       end
     end
     context "with empty password in params" do

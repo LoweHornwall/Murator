@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       if @user.activated?
         session[:user_id] = @user.id
         flash[:success] = "Logged in as #{@user.name}"
-        redirect_to root_url
+        redirect_back_or root_url
       else
         flash[:danger] = "Acccount is not activated"
         render :new
