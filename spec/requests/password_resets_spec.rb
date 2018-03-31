@@ -53,8 +53,8 @@ RSpec.describe "PasswordResets", type: :request do
   end
 
   describe "GET /password_resets/:id/edit" do
+    let (:user) { create(:user, :activated) }
     context "with valid params" do
-      let (:user) { create(:user, :activated) }
       before :each do
         user.create_reset_digest
         get edit_password_reset_path(user.reset_token, email: user.email)
@@ -66,7 +66,6 @@ RSpec.describe "PasswordResets", type: :request do
     end
 
     context "with invalid email" do
-      let (:user) { create(:user, :activated) }
       before :each do
         user.create_reset_digest
         get edit_password_reset_path(user.reset_token, 
@@ -79,7 +78,6 @@ RSpec.describe "PasswordResets", type: :request do
     end
 
     context "with invalid token" do
-      let (:user) { create(:user, :activated) }
       before :each do
         user.create_reset_digest
         get edit_password_reset_path("123", 
@@ -103,7 +101,6 @@ RSpec.describe "PasswordResets", type: :request do
       end
     end
     context "with expired token" do
-      let (:user) { create(:user, :activated) }
       before :each do
         user.create_reset_digest
         user.update_attribute(:reset_sent_at, 3.hours.ago)
@@ -122,8 +119,8 @@ RSpec.describe "PasswordResets", type: :request do
   end
 
   describe "PATCH /password_resets/:id" do
+    let (:user) { create(:user, :activated) }
     context "with valid params" do
-      let (:user) { create(:user, :activated) }
       before :each do
         user.create_reset_digest
         patch password_reset_path(user.reset_token), params: {
@@ -148,7 +145,6 @@ RSpec.describe "PasswordResets", type: :request do
       end
     end
     context "with empty password in params" do
-      let (:user) { create(:user, :activated) }
       before :each do
         user.create_reset_digest
         patch password_reset_path(user.reset_token), params: {
@@ -183,7 +179,6 @@ RSpec.describe "PasswordResets", type: :request do
     end
 
     context "with expired token" do
-      let (:user) { create(:user, :activated) }
       before :each do
         user.create_reset_digest
         user.update_attribute(:reset_sent_at, 3.hours.ago)

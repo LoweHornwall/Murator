@@ -12,5 +12,11 @@ FactoryBot.define do
     trait :activated do
       activated true
     end
+
+    trait :with_curation_pages do
+      after(:create) do |user, evaluator|
+        create_list(:curation_page, 5, user: user)
+      end
+    end
   end
 end

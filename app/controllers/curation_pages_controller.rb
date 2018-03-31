@@ -6,6 +6,7 @@ class CurationPagesController < ApplicationController
 
   def show
     @curation_page = CurationPage.find(params[:id])
+    @reviews = @curation_page.reviews.paginate(page: params[:page])
   end
 
   def new

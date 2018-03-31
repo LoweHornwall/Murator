@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "AccountActivations", type: :request do
   describe "GET /edit_account_activation" do
-    context "with valid token" do
-      let(:user) { create(:user) }
+    let(:user) { create(:user) }
+    context "with valid token" do      
       before :each do
         get edit_account_activation_path(user.activation_token, email: user.email)
       end
@@ -17,12 +17,11 @@ RSpec.describe "AccountActivations", type: :request do
       end
 
       it "redirects to user" do
-        expect(response).to redirect_to user
+        expect(response).to redirect_to :root
       end
     end
 
     context "with invalid token" do
-      let(:user) { create(:user) }
       before :each do
         get edit_account_activation_path("foo", email: user.email)
       end

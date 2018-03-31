@@ -4,5 +4,6 @@ class CurationPage < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: false }
   validates :description, length: { maximum: 255 }
   belongs_to :user
+  has_many :reviews
   self.per_page = 10
 end

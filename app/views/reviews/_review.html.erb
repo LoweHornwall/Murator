@@ -1,0 +1,9 @@
+<li id="review-<%= review.id %>">
+  <div class="row">
+    <h2><%= review.release_group.release %> by <%= review.release_group.artist %></h2>
+  </div>
+  <div class="row">
+    <%= review.content %>
+    <b> Rating: <%= review.rating %>/10</b>
+  </div>
+</li>

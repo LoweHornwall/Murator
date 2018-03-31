@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327102054) do
+ActiveRecord::Schema.define(version: 20180328141820) do
 
   create_table "curation_pages", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,27 @@ ActiveRecord::Schema.define(version: 20180327102054) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_curation_pages_on_name", unique: true
     t.index ["user_id"], name: "index_curation_pages_on_user_id"
+  end
+
+  create_table "release_groups", force: :cascade do |t|
+    t.string "rgid"
+    t.string "release"
+    t.string "artist"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist"], name: "index_release_groups_on_artist"
+    t.index ["release"], name: "index_release_groups_on_release"
+    t.index ["rgid"], name: "index_release_groups_on_rgid", unique: true
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating", default: 10
+    t.integer "curation_page_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "release_group_id"
+    t.index ["curation_page_id", "release_group_id"], name: "index_reviews_on_curation_page_id_and_release_group_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

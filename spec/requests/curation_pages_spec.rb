@@ -26,8 +26,8 @@ RSpec.describe "CurationPages", type: :request do
   end
 
   describe "GET /curation_pages/new" do
+    let(:user) { create(:user, :activated) }
     context "when logged in" do
-      let(:user) { create(:user, :activated) }
       before :each do
         log_in user
         get new_curation_page_path
@@ -46,8 +46,8 @@ RSpec.describe "CurationPages", type: :request do
   end
 
   describe "POST /curation_pages" do
+    let(:user) { create(:user, :activated) }
     context "when params valid and logged in" do
-      let(:user) { create(:user, :activated) }
       before :each do
         log_in user
       end
@@ -63,7 +63,6 @@ RSpec.describe "CurationPages", type: :request do
       end
     end
     context "when params invalid" do
-      let(:user) { create(:user, :activated) }
       before :each do
         log_in user
         post curation_pages_path, params: { 
@@ -75,7 +74,6 @@ RSpec.describe "CurationPages", type: :request do
       end
     end
     context "when not logged in" do
-      let(:user) { create(:user, :activated) }
       before :each do
         post curation_pages_path, params: { 
           curation_page: attributes_for(:curation_page) }

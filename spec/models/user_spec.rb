@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "Validations" do
+  describe "validations" do
 
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:email) }
@@ -28,4 +28,14 @@ RSpec.describe User, type: :model do
     it { should validate_length_of(:name).is_at_most(64) }
     it { should validate_length_of(:email).is_at_most(255) }
   end
+
+  describe "associations" do
+    it { is_expected.to have_many(:curation_pages) }
+  end
+
+  describe "callbacks" do
+    it { is_expected.to callback(:email_downcase).before(:save) }
+    it { is_expected.to callback(:set_activation_token).before(:create) }
+  end
+
 end

@@ -1,0 +1,18 @@
+<div id="search_result">
+  <% if @search %>
+    <ul>
+      <% @search[:releases].each do |release| %>
+        <li>
+          <b>release:</b> <%= release[:release] %>, 
+          <b>artist:</b> <%= release[:artist] %>
+          <%= button_tag "select", class: "select", value: release.to_json %>
+        </li>
+      <% end %>
+    </ul>
+    pages: <%= @search[:pages_count] %>
+    <%= button_tag "previous page", id: "prev" if @search[:page] > 0 %>
+    <b>Page: </b><%= @search[:page] %>
+    <%= button_tag "next page", id: "next" if @search[:page] < @search[:pages_count] %>
+  <% end %>
+
+</div>
