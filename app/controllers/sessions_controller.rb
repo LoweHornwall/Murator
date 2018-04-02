@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         flash[:success] = "Logged in as #{@user.name}"
         redirect_back_or root_url
       else
-        flash[:danger] = "Acccount is not activated"
+        flash[:danger] = "Account is not activated"
         render :new
       end
     else
