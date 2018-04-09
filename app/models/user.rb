@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { in: 6..64 }, allow_nil: true
   has_secure_password
   has_many :curation_pages
+  has_many :page_followings, dependent: :destroy
+  has_many :followed_pages, through: :page_followings, source: :curation_page
 
   def User.digest(string)
     BCrypt::Password.create(string)
@@ -44,6 +46,23 @@ class User < ApplicationRecord
 
   def activate
     update_columns(activated: true)
+  end
+
+  def follow(curation_page)
+    followed_pages << curation_page unless following?(curation_page)
+  end
+
+  def unfollow(curation_page)
+    followed_pages.delete(curation_page)
+  end
+
+  def following?(curation_page)
+    followed_pages.include?(curation_page)
+  end
+
+  def feed
+    Review.where("curation_page_id IN (SELECT curation_page_id FROM
+      page_followings WHERE user_id = :user_id)", user_id: id)
   end
 
   private

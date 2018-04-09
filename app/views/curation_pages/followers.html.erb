@@ -1,0 +1,8 @@
+<div>
+  This page has <%= pluralize(@followers.total_entries, "follower") %>
+</div>
+
+<ul class="curation_pages">
+  <%= render @followers %>
+</ul>
+<%= will_paginate @followers %>

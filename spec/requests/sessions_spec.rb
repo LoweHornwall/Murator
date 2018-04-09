@@ -1,5 +1,12 @@
 require 'rails_helper'
 RSpec.describe "Sessions", type: :request do
+  before :all do
+    @email = "a@a.com" 
+    @password = "123hej"
+    create(:user, email: @email, password: @password, 
+      password_confirmation: @password, activated: true) 
+  end 
+
   describe "GET /login" do
     before :each do
       get login_path
@@ -10,16 +17,9 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "POST /login" do
-    EMAIL = "a@a.com"
-    PASSWORD = "123hej"
-    before :all do
-      create(:user, email: EMAIL, password: PASSWORD, 
-             password_confirmation: PASSWORD, activated: true)
-    end
-
     context "when params valid" do
       before :each do
-        post login_path, params: { session: { email: EMAIL, password: PASSWORD } } 
+        post login_path, params: { session: { email: @email, password: @password } } 
       end
       it "should set session" do
         expect(session[:user_id]).to_not be_nil
@@ -49,13 +49,13 @@ RSpec.describe "Sessions", type: :request do
     end
 
     context "when params valid but user not activated" do
-      EMAIL2 = "b@b.com"
       before :all do 
-        create(:user, email: EMAIL2, password: PASSWORD, 
-               password_confirmation: PASSWORD, activated: false)
+        @email2 = "b@b.com"
+        create(:user, email: @email2, password: @password, 
+               password_confirmation: @password, activated: false)
       end
       before :each do
-        post login_path, params: { session: { email: EMAIL2, password: PASSWORD } } 
+        post login_path, params: { session: { email: @email2, password: @password } } 
       end
 
       it "should not set session" do
@@ -74,7 +74,7 @@ RSpec.describe "Sessions", type: :request do
 
   describe "DELETE /logout" do
     before :each do 
-      post login_path, params: { session: { email: EMAIL2, password: PASSWORD } } 
+      post login_path, params: { session: { email: @email, password: @password } } 
       delete logout_url
     end
 

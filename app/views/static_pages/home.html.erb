@@ -1,8 +1,11 @@
 <% if logged_in? %>
   <h1>Welcome <%= current_user.name %>!</h1>
   <%= link_to "Log out", logout_path, method: :delete %>
-  <%= link_to "Your pages", current_user %>
+  <%= link_to "Your Pages", current_user %>
+  <%= render 'shared/feed' %>
+  <%= link_to "View Followed Pages", followed_user_path(current_user) %>
 <% else %>
   <%= link_to "Register", new_user_path %>
   <%= link_to "Log in", login_path %>
 <% end %>
+<%= link_to "Curation Pages", curation_pages_path %>

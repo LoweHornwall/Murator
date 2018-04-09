@@ -1,6 +1,6 @@
 FactoryBot.define do
   sequence :rgid do |n|
-    "1" * 35 + n.to_s
+    n.to_s + "1" * (36 - n.to_s.length)
   end
 
   factory :release_group do

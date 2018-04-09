@@ -63,9 +63,6 @@ RSpec.describe "Reviews", type: :request do
         }
       end
       it { is_expected.to render_template :new }
-      it "shows errors" do
-        expect(response.body).to match "error" || "errors"
-      end
     end
   end
 end

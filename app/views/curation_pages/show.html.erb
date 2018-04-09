@@ -4,7 +4,9 @@
 <ul>
   <%= render @reviews %>
 </ul>
+<%= link_to "View Followers", followers_curation_page_path(@curation_page) %>
 <%= will_paginate @reviews %>
 <% if belongs_to_user? %>
   <%= link_to "add review", new_curation_page_review_path(@curation_page) %>
 <% end %>
+<%= render 'follow_form' if logged_in? %>

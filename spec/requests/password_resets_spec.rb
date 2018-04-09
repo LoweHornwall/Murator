@@ -155,9 +155,6 @@ RSpec.describe "PasswordResets", type: :request do
           }
         }
       end
-      it "has error" do
-        expect(response.body).to match "error"
-      end
 
       it "renders edit" do
         expect(response).to render_template :edit

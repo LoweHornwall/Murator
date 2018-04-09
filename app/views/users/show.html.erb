@@ -1,8 +1,8 @@
 <h1><%= @user.name %></h1>  
 
-<ol>
+<ul>
   <%= render @curation_pages %>
-</ol>
+</ul>
 <%= will_paginate @curation_pages %>
 
 <% if current_user?(@user) %>

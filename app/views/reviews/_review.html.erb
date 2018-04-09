@@ -3,7 +3,12 @@
     <h2><%= review.release_group.release %> by <%= review.release_group.artist %></h2>
   </div>
   <div class="row">
-    <%= review.content %>
+    <%= review.content[0..100]%>
+    <% if review.content.length > 100 %>
+      ...
+    <% end %>
     <b> Rating: <%= review.rating %>/10</b>
+    <sub>From <%= link_to review.curation_page.name, curation_page_path(review.curation_page) %>
+    <%= link_to "view full review", curation_page_review_path(review.curation_page, review) %>
   </div>
 </li>

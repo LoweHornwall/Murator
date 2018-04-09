@@ -17,10 +17,7 @@ RSpec.describe "Users", type: :request do
       get user_path(user)
     end
 
-    it { is_expected.to render_template :show}
-    it "shows user name" do
-      expect(response.body).to match user.name
-    end
+    it { is_expected.to render_template :show}  
   end
 
   describe "POST /users" do
@@ -55,5 +52,15 @@ RSpec.describe "Users", type: :request do
         expect(response).to render_template :new
       end
     end
+  end
+
+  describe "GET /users/:id/followed" do
+    let(:user) { create(:user, :activated, :with_page_followings) }
+
+    before :each do
+      log_in user
+      get followed_user_path(user)
+    end
+    it { is_expected.to render_template :followed }
   end
 end

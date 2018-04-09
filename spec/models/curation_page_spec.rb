@@ -10,8 +10,10 @@ RSpec.describe CurationPage, type: :model do
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
   end
 
-  describe "assoications" do
+  describe "associations" do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:reviews) }
+    it { is_expected.to have_many(:page_followings).dependent(:destroy) }
+    it { is_expected.to have_many(:followers) }
   end
 end

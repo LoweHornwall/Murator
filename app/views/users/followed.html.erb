@@ -1,0 +1,9 @@
+<div>
+  You follow <%= pluralize(@curation_pages.total_entries, "page") %>
+</div>
+<div>
+  <ul>
+    <%= render @curation_pages %>
+  </ul>
+  <%= will_paginate @curation_pages %>
+</div>

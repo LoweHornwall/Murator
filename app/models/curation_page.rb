@@ -5,5 +5,7 @@ class CurationPage < ApplicationRecord
   validates :description, length: { maximum: 255 }
   belongs_to :user
   has_many :reviews
+  has_many :page_followings, dependent: :destroy
+  has_many :followers, through: :page_followings, source: :user
   self.per_page = 10
 end

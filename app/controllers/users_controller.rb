@@ -19,6 +19,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def followed
+    user = User.find(params[:id])
+    @curation_pages = user.followed_pages.paginate(page: params[:page])
+  end
+
   private 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)

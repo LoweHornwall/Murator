@@ -18,5 +18,13 @@ FactoryBot.define do
         create_list(:curation_page, 5, user: user)
       end
     end
+
+    trait :with_page_followings do
+      after(:create) do |user, evaluator|
+        3.times do
+          user.followed_pages << create(:curation_page)
+        end
+      end
+    end
   end
 end
