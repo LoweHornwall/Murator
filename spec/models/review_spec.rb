@@ -18,4 +18,12 @@ RSpec.describe Review, type: :model do
     it { is_expected.to belong_to(:curation_page) }
     it { is_expected.to belong_to(:release_group) }
   end
+
+  describe "default scope" do
+    let!(:review_1) { create(:review) }
+    let!(:review_2) { create(:review) }
+    it "orders by created_at desc" do
+      expect(Review.all).to eq [review_2, review_1]
+    end
+  end
 end

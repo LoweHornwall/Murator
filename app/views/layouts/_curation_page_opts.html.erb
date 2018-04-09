@@ -1,0 +1,11 @@
+<% if logged_in? %>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    Your Stuff <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Your Pages", current_user %></li>
+      <li><%= link_to "Followed Pages", followed_user_path(current_user) %></li>
+    </ul> 
+  </li>
+<% end %>

@@ -6,8 +6,10 @@ class Review < ApplicationRecord
   validates :curation_page, uniqueness: { scope: :release_group_id } # _id for shoulda matchers
   belongs_to :curation_page
   belongs_to :release_group
+  default_scope { order(created_at: :desc) }
   self.per_page = 5
 
+  # move to controller layer?
   def assign_release_group
     if release_group = ReleaseGroup.find_by(rgid: self.rgid) 
       self.release_group = release_group
