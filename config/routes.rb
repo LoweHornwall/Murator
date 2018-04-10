@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'release_groups/search'
   root 'static_pages#home'
+  get 'static_pages/about', to: 'static_pages#about'
   resources :users,               only: [:show, :new, :create] do
     member do
       get :followed
@@ -17,5 +18,5 @@ Rails.application.routes.draw do
   resources :page_followings, only: [:create, :destroy]
   get '/login',      to: 'sessions#new'
   post '/login',     to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  delete '/logout',  to: 'sessions#destroy'
 end

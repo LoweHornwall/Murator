@@ -1,14 +1,16 @@
-<nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to "Murator", root_path, class: "navbar-brand" %>
+<header>
+  <nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to "Murator", root_path, class: "navbar-brand" %>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Curation Pages", curation_pages_path %></li>
+        <%= render 'layouts/curation_page_opts' %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <%= render 'layouts/account' %>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li><%= link_to "Curation Pages", curation_pages_path %>
-      <%= render 'layouts/curation_page_opts' %>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <%= render 'layouts/account' %>
-    </ul>
-  </div>
-</nav>
+  </nav>
+</header>
