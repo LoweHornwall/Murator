@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :curation_pages
   has_many :page_followings, dependent: :destroy
   has_many :followed_pages, through: :page_followings, source: :curation_page
-
+  self.per_page = 20
+  
   def User.digest(string)
     BCrypt::Password.create(string)
   end
@@ -61,8 +62,9 @@ class User < ApplicationRecord
   end
 
   def feed
-    Review.where("curation_page_id IN (SELECT curation_page_id FROM
-      page_followings WHERE user_id = :user_id)", user_id: id)
+    Review.includes(:curation_page, :release_group)
+      .where("curation_page_id IN (SELECT curation_page_id FROM
+        page_followings WHERE user_id = :user_id)", user_id: id)
   end
 
   private

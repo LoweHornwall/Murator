@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.includes(:curation_pages).paginate(page: params[:page])
+  end
+
   def new
     @user = User.new
   end

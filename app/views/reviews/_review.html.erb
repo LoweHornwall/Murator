@@ -1,14 +1,19 @@
 <li id="review-<%= review.id %>">
-  <div class="row">
-    <h2><%= review.release_group.release %> by <%= review.release_group.artist %></h2>
-  </div>
-  <div class="row">
-    <%= review.content[0..100]%>
-    <% if review.content.length > 100 %>
-      ...
-    <% end %>
-    <b> Rating: <%= review.rating %>/10</b>
-    <sub>From <%= link_to review.curation_page.name, curation_page_path(review.curation_page) %>
-    <%= link_to "view full review", curation_page_review_path(review.curation_page, review) %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <%=review.release_group.release %> <em>by <%= review.release_group.artist %></em>
+        | Rating: <%= review.rating %>/10
+      </h3>
+      <sub>From <%= link_to review.curation_page.name, curation_page_path(review.curation_page) %></sub>
+    </div>
+    <div class="panel-body">
+      <% review_string = review.content[0..200] %>
+      <% if review.content.length > 200 %>
+        <% review_string << "..." %>
+      <% end %>
+      <%= review_string %>
+      <small><%= link_to "view full review", curation_page_review_path(review.curation_page, review) %></small>
+    </div>
   </div>
 </li>

@@ -1,10 +1,12 @@
 <h1><%= @user.name %></h1>  
-
-<ul>
-  <%= render @curation_pages %>
-</ul>
-<%= will_paginate @curation_pages %>
-
+This user has <%= pluralize(@curation_pages.total_entries, "page") %>
 <% if current_user?(@user) %>
-  <%= link_to "Create new curation page", new_curation_page_path %>
+  <%= link_to "Create new curation page", new_curation_page_path, class: "btn btn-primary" %>
 <% end %>
+
+<div>
+  <ul class="curation_pages">
+    <%= render @curation_pages %>
+  </ul>
+  <%= will_paginate @curation_pages %>
+</div>

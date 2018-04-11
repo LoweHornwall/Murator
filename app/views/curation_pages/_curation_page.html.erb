@@ -1,4 +1,16 @@
 <li id="curation_page-<%= curation_page.id %>">
-  <%= link_to curation_page.name, curation_page %>
-  <sub> created by <%= curation_page.user.name %></sub>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= link_to curation_page.name,  curation_page %></h3>
+      <small>
+        Created by: <%= curation_page.user.name %> |
+        Created: <%= curation_page.created_at %> |
+        Followers: <%= curation_page.followers.count %>
+      </small>
+    </div>
+    <div class="panel-body">
+      <%= curation_page.description %>
+    </div>
+  </div>
 </li>
+

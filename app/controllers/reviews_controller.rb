@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :correct_user,   only: [:new, :create]
 
   def show
-    @review = Review.find(params[:id])
+    @review = Review.includes(:curation_page).find(params[:id])
   end
 
   def new

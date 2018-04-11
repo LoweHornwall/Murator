@@ -1,3 +1,12 @@
 <li id="user-<%= user.id%>">
-  <%= link_to user.name, user %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="panel-title">
+        <%= link_to user.name, user %> 
+      </div>
+      <sub>
+        has <%= pluralize(user.curation_pages.count, "page") %>
+      </sub>
+    </div>
+  </div>
 </li>

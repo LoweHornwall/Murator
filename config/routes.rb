@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'release_groups/search'
   root 'static_pages#home'
   get 'static_pages/about', to: 'static_pages#about'
-  resources :users,               only: [:show, :new, :create] do
+  resources :users,               only: [:index, :show, :new, :create] do
     member do
       get :followed
     end
