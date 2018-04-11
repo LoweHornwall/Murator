@@ -1,5 +1,5 @@
 <div>
-  This page has <%= pluralize(@followers.total_entries, "follower") %>
+  This page has <%= pluralize(@curation_page.page_followings.size, "follower") %>
 </div>
 
 <ul class="curation_pages">

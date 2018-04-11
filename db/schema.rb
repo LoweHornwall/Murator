@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403102858) do
+ActiveRecord::Schema.define(version: 20180411134320) do
 
   create_table "curation_pages", force: :cascade do |t|
     t.integer "user_id"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20180403102858) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "page_followings_count"
+    t.integer "reviews_count", default: 0
     t.index ["name"], name: "index_curation_pages_on_name", unique: true
     t.index ["user_id"], name: "index_curation_pages_on_user_id"
   end
@@ -63,6 +65,8 @@ ActiveRecord::Schema.define(version: 20180403102858) do
     t.boolean "activated", default: false
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer "page_followings_count"
+    t.integer "curation_pages_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

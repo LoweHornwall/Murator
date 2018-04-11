@@ -24,8 +24,8 @@ class UsersController < ApplicationController
   end
 
   def followed
-    user = User.find(params[:id])
-    @curation_pages = user.followed_pages.paginate(page: params[:page])
+    @user = User.find(params[:id])
+    @curation_pages = @user.followed_pages.paginate(page: params[:page])
   end
 
   private 

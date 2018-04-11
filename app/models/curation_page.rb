@@ -3,7 +3,7 @@ class CurationPage < ApplicationRecord
   validates :name, length: { maximum: 64 }
   validates :name, uniqueness: { case_sensitive: false }
   validates :description, length: { maximum: 255 }
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :reviews
   has_many :page_followings, dependent: :destroy
   has_many :followers, through: :page_followings, source: :user

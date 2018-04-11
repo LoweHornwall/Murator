@@ -5,7 +5,7 @@
         <%= link_to user.name, user %> 
       </div>
       <sub>
-        has <%= pluralize(user.curation_pages.count, "page") %>
+        has <%= pluralize(user.curation_pages.size, "page") %>
       </sub>
     </div>
   </div>

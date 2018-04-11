@@ -1,5 +1,5 @@
 <div>
-  You follow <%= pluralize(@curation_pages.total_entries, "page") %>
+  <%= @user.name %> follows <%= pluralize(@user.page_followings.size, "page") %>
 </div>
 <div>
   <ul>

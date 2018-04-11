@@ -15,8 +15,8 @@ class CurationPagesController < ApplicationController
   end
 
   def followers
-    curation_page = CurationPage.find(params[:id])
-    @followers = curation_page.followers.paginate(page: params[:page])
+    @curation_page = CurationPage.find(params[:id])
+    @followers = @curation_page.followers.paginate(page: params[:page])
   end
 
   def create
