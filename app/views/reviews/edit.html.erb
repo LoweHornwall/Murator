@@ -1,0 +1,17 @@
+<%= render 'search_form' %>
+
+<%= form_for @review, url: curation_page_review_path(@review.curation_page, @review) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :selected_release, "Selected Release" %>
+  <%= f.text_field :selected_release_name, value: @review.release_group.release, readonly: true, class: "form-control selected_release_name"%>
+  <%= f.hidden_field :rgid, class: "rgid" %>
+
+  <%= f.label :content %>
+  <%= f.text_area :content, class: "form-control", cols: 40, rows: 15 %>
+
+  <%= f.label :rating %>
+  <%= f.select :rating, options_for_select((1..10), @review.rating) , class: "form-control"%>
+
+  <%= f.submit :submit, class: "btn btn-primary" %>
+<% end %>

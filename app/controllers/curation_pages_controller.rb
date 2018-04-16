@@ -1,5 +1,7 @@
 class CurationPagesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update]
+  before_action :correct_user, only: [:edit, :update]
+
   def index
     if !params[:term].blank?
       @curation_pages = CurationPage.where('name LIKE ?', "#{params[:term]}")
@@ -19,11 +21,6 @@ class CurationPagesController < ApplicationController
     @curation_page = CurationPage.new
   end
 
-  def followers
-    @curation_page = CurationPage.find(params[:id])
-    @followers = @curation_page.followers.paginate(page: params[:page])
-  end
-
   def create
     @curation_page = current_user.curation_pages.build(curation_page_params)
     if @curation_page.save
@@ -34,8 +31,20 @@ class CurationPagesController < ApplicationController
     end
   end
 
+  def followers
+    @curation_page = CurationPage.find(params[:id])
+    @followers = @curation_page.followers.paginate(page: params[:page])
+  end
+
   private
     def curation_page_params
       params.require(:curation_page).permit(:name, :description)
+    end
+
+    def correct_user
+      @curation_page = current_user.curation_pages.find_by(id: params[:id])
+      if @curation_page.nil?
+        redirect_to root_url
+      end
     end
 end

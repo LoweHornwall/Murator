@@ -4,6 +4,10 @@ module SpecSessionHelpers
       password: attributes_for(:user)[:password]} }
   end
 
+  def activate(user)
+    user.update_attribute(:activated, true)
+  end
+
   def feature_log_in(user)
     visit "/login"
     fill_in "Email", with: user.email

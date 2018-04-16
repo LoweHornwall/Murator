@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :curation_pages,      only: [:index, :show, :new, :create] do
-    resources :reviews, only: [:show, :new, :create]
+    resources :reviews, only: [:show, :new, :create, :edit, :update, :destroy]
     member do
       get :followers
     end 
