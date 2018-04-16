@@ -72,4 +72,14 @@ RSpec.feature "CurationPages", type: :feature do
     expect(page).to have_content description
     expect(page).to have_content "Created by #{user.name}"
   end
+
+  scenario "searching for curation page" do
+    visit curation_pages_path
+
+    curation_page_name = user.curation_pages.first.name
+    fill_in "Search Curation Pages", with: curation_page_name
+    click_button "Search"
+
+    expect(page).to have_content curation_page_name
+  end
 end

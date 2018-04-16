@@ -1,5 +1,5 @@
-<%= form_tag({controller: :release_groups, action: :search}, method: :Get, remote: true) do %>
-  <%= hidden_field_tag :page, 0, id: "page" %>
+<%= form_tag({controller: :release_groups, action: :search}, method: :get, remote: true) do %>
+  <%= hidden_field_tag :page, 1, id: "page" %>
   <%= label_tag :search_by, "search by:" %>
   <%= select_tag :search_by, options_for_select(["release", "artist"]) %>
   <%= label_tag :search_for, "search for" %>

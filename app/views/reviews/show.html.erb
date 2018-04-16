@@ -1,4 +1,4 @@
 <h1><%= @review.release_group.release %></h1>
-<p><%= @review.content %></p>
+<p><%= simple_format(@review.content) %></p>
 <p><b><%= @review.rating %>/10</b></p>
 From Curation Page <%= link_to @review.curation_page.name, curation_page_path(@review.curation_page) %>

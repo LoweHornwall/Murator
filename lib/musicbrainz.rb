@@ -1,15 +1,23 @@
 class Musicbrainz
   ROOT = "http://musicbrainz.org/ws/2/"
+  PAGE_LENGTH = 25
   class TooManyRequests < StandardError
   end
 
   def self.list_release_groups(search_term, options = {})
-    options.reverse_merge!(search_by: "artist", page: 0)
+    options.reverse_merge!(search_by: "artist", page: 1)
     search = self.search_release_group(search_term, options[:search_by], 
-                                       options[:page])
-    if search
-      releases = { pages_count: search["count"], page: search["offset"],
-                   releases: []}
+                                       (options[:page] - 1) * PAGE_LENGTH)
+    releases = {}
+    if search && !search.empty?
+      if search["count"] < 25
+        releases[:pages_count] = 1
+      else
+        releases[:pages_count] = search["count"] / PAGE_LENGTH 
+        releases[:pages_count] += 1 if search["count"] % PAGE_LENGTH != 0
+      end
+      releases[:page] = search["offset"] / PAGE_LENGTH + 1
+      releases[:releases] = []
       search["release-groups"].each do |group|
         releases[:releases].push(self.format_release_group(group))
       end

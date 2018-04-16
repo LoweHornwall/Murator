@@ -1,7 +1,12 @@
 class CurationPagesController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
   def index
-    @curation_pages = CurationPage.all.paginate(page: params[:page])
+    if !params[:term].blank?
+      @curation_pages = CurationPage.where('name LIKE ?', "#{params[:term]}")
+        .paginate(page: params[:page])
+    else
+      @curation_pages = CurationPage.all.paginate(page: params[:page])
+    end
   end
 
   def show

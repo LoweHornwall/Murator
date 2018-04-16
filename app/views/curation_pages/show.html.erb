@@ -1,12 +1,12 @@
 <h1><%= @curation_page.name %></h1>
 <p><%= @curation_page.description %></p>
-<b>Created by <%= @curation_page.user.name %></b>
+  <b>Created by <%= @curation_page.user.name %></b>
+  <%= link_to "View Followers", followers_curation_page_path(@curation_page), class: "following_bar" %>
+  <%= render 'follow_form' if logged_in? %>
 <ul>
   <%= render @reviews %>
 </ul>
-<%= link_to "View Followers", followers_curation_page_path(@curation_page) %>
 <%= will_paginate @reviews %>
 <% if belongs_to_user? %>
   <%= link_to "add review", new_curation_page_review_path(@curation_page) %>
 <% end %>
-<%= render 'follow_form' if logged_in? %>

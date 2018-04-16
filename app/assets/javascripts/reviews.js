@@ -21,7 +21,7 @@ document.addEventListener("turbolinks:load", function(){
     }
   }, ".select");
   $("#submit").click(function() {
-    $("#page").val(0);
+    $("#page").val(1);
   })
 
 });

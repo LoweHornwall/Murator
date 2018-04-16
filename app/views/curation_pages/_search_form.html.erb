@@ -1,0 +1,4 @@
+<%= form_tag(curation_pages_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term], placeholder: "Search Curation Pages" %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>

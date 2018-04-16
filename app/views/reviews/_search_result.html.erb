@@ -3,14 +3,19 @@
     <ul>
       <% @search[:releases].each do |release| %>
         <li>
-          <b>release:</b> <%= release[:release] %>, 
-          <b>artist:</b> <%= release[:artist] %>
-          <%= button_tag "select", class: "select", value: release.to_json %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <%= release[:release]%> by <em><%= release[:artist] %></em>
+                <%= button_tag "select", class: "select btn btn-default", value: release.to_json %>
+              </h3>
+            </div>
+          </div>
         </li>
       <% end %>
     </ul>
     pages: <%= @search[:pages_count] %>
-    <%= button_tag "previous page", id: "prev" if @search[:page] > 0 %>
+    <%= button_tag "previous page", id: "prev" if @search[:page] > 1 %>
     <b>Page: </b><%= @search[:page] %>
     <%= button_tag "next page", id: "next" if @search[:page] < @search[:pages_count] %>
   <% end %>

@@ -1,5 +1,5 @@
 <%= form_for(current_user.page_followings.find_by(curation_page_id: @curation_page.id),
-             html: { method: :delete },
+             html: { method: :delete, class: "following_bar" },
              remote: true) do |f| %>
   <%= f.submit "Unfollow", class: "btn btn-primary" %>
 <% end %>

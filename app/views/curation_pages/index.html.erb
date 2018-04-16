@@ -1,4 +1,9 @@
-<ul>
-  <%= render @curation_pages %>
-</ul>
-<%= will_paginate @curation_pages %>
+<%= render "search_form" %>
+<% if @curation_pages.blank? %>
+  <h3>No curation pages matching "<%= params[:term] %>" found</h3>
+<% else %>
+  <ul>
+    <%= render @curation_pages %>
+  </ul>
+  <%= will_paginate @curation_pages %>
+<% end %>
