@@ -1,6 +1,7 @@
-<h1><%= @review.release_group.release %></h1>
+<h1><%= @review.release_group.release %> <em>by <%= @review.release_group.artist %></em></h1>
 <p><%= simple_format(@review.content) %></p>
 <p><b><%= @review.rating %>/10</b></p>
+<%= cover_art_for(@review.release_group.rgid) %>
 From Curation Page <%= link_to @review.curation_page.name, curation_page_path(@review.curation_page) %>
 <% if current_user?(@review.curation_page.user) %>
   <%= link_to "Edit", edit_curation_page_review_path(@review.curation_page, @review) %>
