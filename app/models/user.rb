@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :curation_pages
   has_many :page_followings, dependent: :destroy
   has_many :followed_pages, through: :page_followings, source: :curation_page
+  has_many :comments
   self.per_page = 20
   
   def User.digest(string)

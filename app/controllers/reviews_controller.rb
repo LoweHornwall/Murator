@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.includes(:curation_page).find(params[:id])
+    @comments = @review.comments.includes(:user).paginate(page: params[:page])
   end
 
   def new

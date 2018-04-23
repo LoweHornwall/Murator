@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get :followers
     end 
   end
+  resources :comments, only: [:create, :update, :destroy]
   resources :page_followings, only: [:create, :destroy]
   get '/login',      to: 'sessions#new'
   post '/login',     to: 'sessions#create'

@@ -34,6 +34,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:curation_pages) }
     it { is_expected.to have_many(:page_followings).dependent(:destroy) }
     it { is_expected.to have_many(:followed_pages) }
+    it { is_expected.to have_many(:comments) }
   end
 
   describe "callbacks" do

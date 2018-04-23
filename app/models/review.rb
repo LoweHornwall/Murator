@@ -6,6 +6,7 @@ class Review < ApplicationRecord
   validates :curation_page, uniqueness: { scope: :release_group_id } # _id for shoulda matchers
   belongs_to :curation_page, counter_cache: true
   belongs_to :release_group
+  has_many :comments
   default_scope { order(created_at: :desc) }
   self.per_page = 5
 

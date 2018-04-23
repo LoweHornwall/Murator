@@ -17,6 +17,7 @@ RSpec.describe Review, type: :model do
   describe "associations" do
     it { is_expected.to belong_to(:curation_page) }
     it { is_expected.to belong_to(:release_group) }
+    it { is_expected.to have_many(:comments) }
   end
 
   describe "default scope" do

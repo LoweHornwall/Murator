@@ -1,0 +1,15 @@
+<li id="comment-<%= comment.id %>">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"> 
+        <%= link_to comment.user.name, comment.user %>
+      </h3>
+      <small>
+        Posted: <%= comment.created_at %>
+      </small>
+    </div>
+    <div class="panel-body">
+      <%= comment.content %>
+    </div>
+  </div>
+</li>
