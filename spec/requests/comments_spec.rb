@@ -43,10 +43,10 @@ RSpec.describe "Comments", type: :request do
         }.to change { review.comments.count }.by 0
       end
 
-      it "renders " do
+      it "redirects to review" do
         post comments_path, params: {  
           comment: { review_id: review.id, content: ""} }
-        expect(response).to render_template "reviews/show"
+        expect(response).to redirect_to curation_page_review_path(review.curation_page, review)
       end
     end
   end
