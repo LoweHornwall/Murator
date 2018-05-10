@@ -1,10 +1,10 @@
 require 'rails_helper'
 RSpec.describe "Sessions", type: :request do
+  let!(:user) { create(:user, email: @email, password: @password, 
+    password_confirmation: @password, activated: true) }
   before :all do
     @email = "a@a.com" 
     @password = "123hej"
-    create(:user, email: @email, password: @password, 
-      password_confirmation: @password, activated: true) 
   end 
 
   describe "GET /login" do
@@ -27,6 +27,16 @@ RSpec.describe "Sessions", type: :request do
 
       it "redirects to root" do
         expect(response).to redirect_to :root
+      end
+
+      it "does not set remember digest" do
+        user.reload
+        expect(user.remember_digest).to be_nil
+      end
+
+      it "does not set cookies" do
+        expect(cookies[:user_id]).to be_nil
+        expect(cookies[:remember_token]).to be_nil
       end
     end
 
@@ -68,6 +78,23 @@ RSpec.describe "Sessions", type: :request do
 
       it "renders the new template" do
         expect(response).to render_template :new
+      end
+    end
+
+    context "when remember me selected" do
+      before :each do
+        post login_path, params: { session: { email: @email, password: @password, 
+            remember_me: "1"} }
+      end
+
+      it "should set remember digest" do
+        user.reload
+        expect(user.remember_digest).to_not be_nil
+      end
+
+      it "sets cookies" do
+        expect(cookies[:user_id]).to_not be_nil
+        expect(cookies[:remember_token]).to_not be_nil
       end
     end
   end

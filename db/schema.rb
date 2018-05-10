@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180421182525) do
+ActiveRecord::Schema.define(version: 20180509171139) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180421182525) do
     t.datetime "updated_at", null: false
     t.integer "page_followings_count"
     t.integer "reviews_count", default: 0
+    t.integer "view_count", default: 0
     t.index ["name"], name: "index_curation_pages_on_name", unique: true
     t.index ["user_id"], name: "index_curation_pages_on_user_id"
   end
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20180421182525) do
     t.datetime "reset_sent_at"
     t.integer "page_followings_count"
     t.integer "curation_pages_count", default: 0
+    t.string "remember_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

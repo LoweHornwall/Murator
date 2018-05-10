@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :activation_token, :reset_token
+  attr_accessor :activation_token, :reset_token, :remember_token
   before_save :email_downcase
   before_create :set_activation_token
   validates :name, presence: true, length: { maximum: 64 }
@@ -60,6 +60,15 @@ class User < ApplicationRecord
 
   def following?(curation_page)
     followed_pages.include?(curation_page)
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
   end
 
   def feed

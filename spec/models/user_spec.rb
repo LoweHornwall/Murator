@@ -42,4 +42,14 @@ RSpec.describe User, type: :model do
     it { is_expected.to callback(:set_activation_token).before(:create) }
   end
 
+  describe "methods" do
+    let(:user) { create(:user, :activated) }
+    describe "authenticated?" do
+      context "when user with nil digest" do
+        it "should return false" do
+          expect(user.authenticated?("remember", "")).to eql false
+        end
+      end
+    end
+  end
 end

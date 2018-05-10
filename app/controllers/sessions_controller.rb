@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
       if @user.activated?
-        session[:user_id] = @user.id
+        log_in(@user)
+        params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
         flash[:success] = "Logged in as #{@user.name}"
         redirect_back_or root_url
       else
