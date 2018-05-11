@@ -2,6 +2,15 @@
 <% if @curation_pages.blank? %>
   <h3>No curation pages matching "<%= params[:term] %>" found</h3>
 <% else %>
+  <p>
+    Order by:
+    <%= link_to "newest", curation_pages_path(order_by: "newest") %>,
+    <%= link_to "oldest", curation_pages_path(order_by: "oldest") %>,
+    <%= link_to "followers", curation_pages_path(order_by: "followers") %>,
+    <%= link_to "reviews", curation_pages_path(order_by: "reviews") %>,
+    <%= link_to "name", curation_pages_path(order_by: "name") %>
+  </p>
+  <%= will_paginate @curation_page %>
   <ul>
     <%= render @curation_pages %>
   </ul>

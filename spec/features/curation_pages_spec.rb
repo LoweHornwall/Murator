@@ -10,6 +10,7 @@ RSpec.feature "CurationPages", type: :feature do
 
   scenario "viewing first page of curation pages" do
     visit "/curation_pages"
+    click_link("oldest")
     (0..9).each do |i|
       expect(page).to have_link curation_pages[i].name
     end
@@ -17,7 +18,8 @@ RSpec.feature "CurationPages", type: :feature do
 
   scenario "viewing second page of curation pages" do
     visit "/curation_pages"
-    click_link "Next →"
+    click_link("oldest")
+    first(:link, "Next →").click
     (10..14).each do |i|
       expect(page).to have_link curation_pages[i].name
     end
@@ -25,7 +27,8 @@ RSpec.feature "CurationPages", type: :feature do
 
   scenario "viewing curation page with reviews" do
     visit "/curation_pages"
-    click_link "Next →"
+    click_link("oldest")
+    first(:link, "Next →").click
     click_link cp_with_reviews.name
 
     expect(page).to have_content cp_with_reviews.name

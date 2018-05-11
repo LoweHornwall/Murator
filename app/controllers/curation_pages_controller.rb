@@ -3,11 +3,13 @@ class CurationPagesController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
+    order = curation_page_order
     if !params[:term].blank?
       @curation_pages = CurationPage.where('name LIKE ?', "#{params[:term]}")
-        .paginate(page: params[:page])
+        .order(order).paginate(page: params[:page])
     else
-      @curation_pages = CurationPage.all.paginate(page: params[:page])
+      @curation_pages = CurationPage.all.order(order)
+        .paginate(page: params[:page])
     end
   end
 
@@ -45,6 +47,21 @@ class CurationPagesController < ApplicationController
       @curation_page = current_user.curation_pages.find_by(id: params[:id])
       if @curation_page.nil?
         redirect_to root_url
+      end
+    end
+
+    def curation_page_order
+      case params[:order_by]
+      when "oldest"
+        order = "created_at ASC"
+      when "name"
+        order = "name"
+      when "followers"
+        order = "page_followings_count DESC"
+      when "reviews"
+        order = "reviews_count DESC"
+      else
+        order = "created_at DESC"
       end
     end
 end
