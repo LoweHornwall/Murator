@@ -1,0 +1,3 @@
+<%= f.fields_for :categories do |category| %>
+  <%= f.select :name, all_categories.map { |c| c.name }, class: "form-control" %>
+<% end %>

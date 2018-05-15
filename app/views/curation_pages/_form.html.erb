@@ -6,5 +6,8 @@
   <%= f.label :description %>
   <%= f.text_area :description, class: "form-control" %>
 
+  <%= render "category_select", categories: @all_categories, f: f %> 
+  <%= f.hidden_field :selected_categories, class: "selected-categories-field", value: "" %>
+
   <%= f.submit "Create curation page", class: "btn btn-primary" %>
 <% end %>

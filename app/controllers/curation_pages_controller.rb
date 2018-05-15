@@ -20,10 +20,12 @@ class CurationPagesController < ApplicationController
   end
 
   def new
+    @all_categories = Category.all
     @curation_page = CurationPage.new
   end
 
   def create
+    @all_categories = Category.all
     @curation_page = current_user.curation_pages.build(curation_page_params)
     if @curation_page.save
       flash[:success] = "Curation page created!"
@@ -40,7 +42,7 @@ class CurationPagesController < ApplicationController
 
   private
     def curation_page_params
-      params.require(:curation_page).permit(:name, :description)
+      params.require(:curation_page).permit(:name, :description, :selected_categories)
     end
 
     def correct_user
@@ -53,15 +55,15 @@ class CurationPagesController < ApplicationController
     def curation_page_order
       case params[:order_by]
       when "oldest"
-        order = "created_at ASC"
+        "created_at ASC"
       when "name"
-        order = "name"
+        "name"
       when "followers"
-        order = "page_followings_count DESC"
+        "page_followings_count DESC"
       when "reviews"
-        order = "reviews_count DESC"
+        "reviews_count DESC"
       else
-        order = "created_at DESC"
+        "created_at DESC"
       end
     end
 end

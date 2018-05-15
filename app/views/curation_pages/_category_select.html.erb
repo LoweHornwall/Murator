@@ -1,0 +1,23 @@
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Add Category
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" id="category-options" aria-labelledby="dropdownMenu1">
+    <% categories.each do |category| %>
+      <li id="category-<%= category.id %>">
+        <%= link_to category.name, "#", value: category.to_json, class: "category-option" %>
+      </li>
+    <% end %>
+  </ul>
+</div>  
+
+<ul class=list-group id="selected-categories">
+  <% f.object.categories.each do |category| %>
+    <li class="list-group-item" id="category-<%= category.id %>" value=<%= category.to_json %>>
+      <%= category.name %>
+      <%= link_to "remove", "#", value: category.to_json, class: "delete btn btn-warning" %> 
+    </li>
+  <% end %>
+</ul>
+

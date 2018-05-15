@@ -15,5 +15,6 @@ RSpec.describe CurationPage, type: :model do
     it { is_expected.to have_many(:reviews) }
     it { is_expected.to have_many(:page_followings).dependent(:destroy) }
     it { is_expected.to have_many(:followers) }
+    it { is_expected.to have_and_belong_to_many(:categories) }
   end
 end
