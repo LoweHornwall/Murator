@@ -3,12 +3,11 @@ class CurationPagesController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    order = curation_page_order
     if !params[:term].blank?
       @curation_pages = CurationPage.where('name LIKE ?', "#{params[:term]}")
-        .order(order).paginate(page: params[:page])
+        .order(curation_page_order).paginate(page: params[:page])
     else
-      @curation_pages = CurationPage.all.order(order)
+      @curation_pages = CurationPage.all.order(curation_page_order)
         .paginate(page: params[:page])
     end
   end

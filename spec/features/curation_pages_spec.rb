@@ -4,13 +4,15 @@ require './spec/support/spec_session_helpers'
 RSpec.configure { |c| c.include SpecSessionHelpers }
 
 RSpec.feature "CurationPages", type: :feature do
-  given!(:curation_pages) { create_list(:curation_page, 15) }
+  given!(:category) { create(:category) }
+  given!(:curation_pages) { create_list(:curation_page, 15, categories: [category]) }
   given!(:cp_with_reviews) { create(:curation_page, :with_reviews) }
   given(:user) { create(:user, :activated, :with_curation_pages) }
 
   scenario "viewing first page of curation pages" do
     visit "/curation_pages"
-    click_link("oldest")
+    click_link "oldest"
+    expect(page).to have_link category.name
     (0..9).each do |i|
       expect(page).to have_link curation_pages[i].name
     end

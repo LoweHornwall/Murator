@@ -15,16 +15,22 @@ class CurationPage < ApplicationRecord
 
   private
     def add_categories
-      return if selected_categories.blank?
-      categories_arr = JSON.parse(selected_categories)
+      categories_arr = json_parser(selected_categories) unless selected_categories.nil?
+      return if categories_arr.nil?
       categories_arr.each do |id|
         category = Category.find_by(id: id)
-        if (category)
+        if category
           categories << category unless categories.include?(category)
         else
-          errors.add(:selected_categories, :blank, 
-            message: "Invalid") if category.nil?
+          errors.add(:selected_categories, :blank, message: "Invalid")
         end
       end
     end
+
+
+    def json_parser(string)
+      JSON.parse(string)
+      rescue JSON::ParserError
+        return nil
+    end 
 end

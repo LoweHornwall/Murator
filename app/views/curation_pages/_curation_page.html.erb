@@ -3,10 +3,11 @@
     <div class="panel-heading">
       <h3 class="panel-title"><%= link_to curation_page.name,  curation_page %></h3>
       <small>
-        Created by: <%= curation_page.user.name %> |
+        Created by: <%= link_to curation_page.user.name , user_path(curation_page.user) %> |
         Created: <%= curation_page.created_at %> |
         reviews: <%= curation_page.reviews.size %> |
-        Followers: <%= curation_page.page_followings.size %> 
+        Followers: <%= curation_page.page_followings.size %> |
+        Categories: <%= render 'curation_pages/page_categories', categories: curation_page.categories %>
       </small>
     </div>
     <div class="panel-body">

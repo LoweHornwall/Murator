@@ -3,4 +3,5 @@ class Category < ApplicationRecord
     length: { maximum: 64 }
 
   has_and_belongs_to_many :curation_pages
+  self.per_page = 20
 end

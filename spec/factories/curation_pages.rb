@@ -13,5 +13,11 @@ FactoryBot.define do
         create_list(:review, 5, curation_page: curation_page)
       end
     end
+
+    trait :with_categories do
+      after(:create) do |curation_page, evaluator|
+        create_list(:category, 3, curation_page: curation_page)
+      end
+    end
   end
 end

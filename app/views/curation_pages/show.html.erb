@@ -1,8 +1,9 @@
 <h1><%= @curation_page.name %></h1>
 <p><%= @curation_page.description %></p>
-  <b>Created by <%= @curation_page.user.name %></b>
-  <%= link_to "View Followers", followers_curation_page_path(@curation_page), class: "following_bar" %>
-  <%= render 'follow_form' if logged_in? %>
+<p>Categories: <%= render 'curation_pages/page_categories', categories: @curation_page.categories %></p>
+<b>Created by <%= link_to @curation_page.user.name, @curation_page.user %></b>
+<%= link_to "View Followers", followers_curation_page_path(@curation_page), class: "following_bar" %>
+<%= render 'follow_form' if logged_in? %>
 <ul>
   <%= render @reviews %>
 </ul>
